@@ -1,15 +1,17 @@
-﻿using GameUsers.API.Entities;
+﻿using GameUsers.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GameUsers.API.Infraestructure
 {
-    public class GameUsersDbContext : DbContext
+    public class GameUsersDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<User> Users {get; set;}
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public GameUsersDbContext(DbContextOptions<GameUsersDbContext> options) : base(options)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Banco de Dados\\Entity Framework\\GameUsersAPIEF\\gameusers.db");
+
         }
+
+        
+
     }
 }
