@@ -32,7 +32,7 @@ namespace GameUsers.API.Controllers
                 DisplayName = request.DisplayName ?? request.Username
             };
 
-            var response = await _authService.RegisterAsync(user, request.Password);
+            var response = await _register.RegisterAsync(user, request.Password);
 
             
             return Ok(response);
