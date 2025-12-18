@@ -1,15 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using GameUsers.API.Models;
+using GameUsers.API.Services;
+using GameUsers.Communication.Request;
+using GameUsers.API.UseCase.Register;
+using GameUsers.API.UseCase.Login;
+using GameUsers.Communication.Response;
 
 namespace GameUsers.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
-        [HttpPost("register")]
-        public IActionResult Register()
+        private readonly IRegisterUserUseCase _register;
+        private readonly ILoginUserUseCase _Login;
+
+        public UserController(IRegisterUserUseCase register, ILoginUserUseCase login)
         {
-            return Ok();
+            _register = register;
+            _Login = login;
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult<AuthResponse>> Register(RegisterUserRequest request)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = request.Username,
+                Email = request.Email,
+                DisplayName = request.DisplayName ?? request.Username
+            };
+
+            var response = await _authService.RegisterAsync(user, request.Password);
+
+            
+            return Ok(response);
         }
         [HttpPost("login")]
         public IActionResult Login()
