@@ -22,6 +22,16 @@ namespace GameUsers.API.Filters
 
                 context.ExceptionHandled = true;
             }
+            else
+            {
+                context.Result = new ObjectResult(new
+                {
+                    errors = new List<string> { "An unexpected error occurred" }
+                })
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError
+                };
+            }
         }
     }
 }

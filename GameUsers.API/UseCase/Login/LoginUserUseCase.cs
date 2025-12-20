@@ -1,7 +1,9 @@
 ﻿using GameUsers.API.Models;
 using GameUsers.API.Services;
+using GameUsers.API.UseCase.Validation;
 using GameUsers.Communication.Request;
 using GameUsers.Communication.Response;
+using GameUsers.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameUsers.API.UseCase.Login
@@ -19,19 +21,32 @@ namespace GameUsers.API.UseCase.Login
         }
         public async Task<AuthResponse> ExecuteAsync(LoginUserRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.Username) ?? throw new DomainException("Invalid credentials.");
+            var user = await _userManager.FindByNameAsync(request.Username) ?? throw new Exception("Invalid credentials.");
 
             var validPassword = await _signInManager.CheckPasswordSignInAsync(user, request.Password, true);
 
             if (!validPassword.Succeeded)
             {
-                throw new DomainException("Invalid Password.");
+                throw new Exception("Invalid Password.");
             }
 
             var token = _tokenService.CreateToken(user);
 
             return new AuthResponse(token);
 
+        }
+
+        private void Validate(LoginUserRequest request)
+        {
+            var validator = new LoginUserRequestValidator();
+
+            var result = validator.Validate(request);
+
+            if (!result.IsValid)
+            {
+                var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errors);
+            }
         }
     }
 }

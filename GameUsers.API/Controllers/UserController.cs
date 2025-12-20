@@ -23,7 +23,7 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AuthResponse>> Register(RegisterUserRequest request)
+        public async Task<ActionResult<AuthResponse>> Register([FromBody]RegisterUserRequest request)
         {
             var user = new ApplicationUser
             {
@@ -32,15 +32,17 @@ namespace GameUsers.API.Controllers
                 DisplayName = request.DisplayName ?? request.Username
             };
 
-            var response = await _register.RegisterAsync(user, request.Password);
+            var response = await _register.ExecuteAsync(request);
 
             
             return Ok(response);
         }
         [HttpPost("login")]
-        public IActionResult Login()
+        public async Task<ActionResult<AuthResponse>> Login([FromBody]LoginUserRequest request)
         {
-            return Ok();
+            var response = _Login.ExecuteAsync(request);
+
+            return Ok(response);
         }
         [HttpGet("me")]
         public IActionResult GetUsers()
