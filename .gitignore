@@ -1,17 +1,17 @@
 # --- Regras para o Angular / Node.js (ui) ---
 # Ignora dependências instaladas
-/ui/node_modules/
-/ui/dist/
-/ui/out-tsc/
-/ui/.angular/
+/front-end/node_modules/
+/front-end/dist/
+/front-end/out-tsc/
+/front-end/.angular/
 
 # --- Regras para o ASP.NET Core (api) ---
 # Ignora arquivos de compilação e execução
-/api/bin/
-/api/obj/
-/api/.vs/
-/api/.vscode/
-/api/appsettings.Development.json
+/GameUsersSolution/bin/
+/GameUsersSolution/obj/
+/GameUsersSolution/.vs/
+/GameUsersSolution/.vscode/
+/GameUsersSolution/appsettings.Development.json
 
 # --- Regras Gerais (Ambos) ---
 # Arquivos de sistema
