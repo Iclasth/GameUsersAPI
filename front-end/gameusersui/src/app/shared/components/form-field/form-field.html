@@ -1,0 +1,16 @@
+<div class="form-field-wrapper">
+    <label class="field-label">{{ label }}</label>
+    <ng-content></ng-content>
+    <div class="error-container" [class.visible] = 'shouldShowErrors'>
+        @if (control?.errors?.['required']) {
+            <span>Este campo é obrigatório!</span>
+        }
+        @if (control?.errors?.['minLength']) {
+            <span>Tamanho mínimo não alcançado. O Tamanho minimo é: {{control?.errors?.['minLength'].requiredLength}}</span>
+        }
+        @if (control?.errors?.['maxLength']) {
+            <span>Tamanho máximo ultrapassado. O Tamanho máximo é: {{control?.errors?.['minLength'].requiredLength}}</span>
+        }
+        
+    </div>
+</div>

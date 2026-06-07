@@ -10,6 +10,10 @@
 # Ignora arquivos de compilação e execução
 /GameUsersSolution/GameUsers.API/bin/
 /GameUsersSolution/GameUsers.API/obj/
+/GameUsersSolution/GameUsers.Communication/bin/
+/GameUsersSolution/GameUsers.Communication/obj/
+/GameUsersSolution/GameUsers.Exceptions/bin/
+/GameUsersSolution/GameUsers.Exceptions/obj/
 /GameUsersSolution/.vs/
 /GameUsersSolution/GameUsers.API/appsettings.Development.json
 /GameUsersSolution/GameUsers.API/gameusers.db
