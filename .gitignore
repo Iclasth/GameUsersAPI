@@ -378,3 +378,6 @@ FodyWeavers.xsd
 
 bin/
 obj/
+
+# Segredos e Configurações locais
+appsettings.Local.json
