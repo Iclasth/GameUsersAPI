@@ -375,3 +375,6 @@ FodyWeavers.xsd
 
 # Variáveis de ambiente
 .env
+
+bin/
+obj/
