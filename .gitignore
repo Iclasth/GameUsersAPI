@@ -1,3 +1,4 @@
+
 # --- Regras para o Angular / Node.js (ui) ---
 # Ignora dependências instaladas
 /front-end/gameusersui/node_modules/
@@ -108,6 +109,7 @@ StyleCopReport.xml
 *.svclog
 *.scc
 *.db
+
 
 # Chutzpah Test files
 _Chutzpah*
@@ -381,3 +383,4 @@ obj/
 
 # Segredos e Configurações locais
 appsettings.Local.json
+
