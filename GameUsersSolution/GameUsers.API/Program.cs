@@ -78,7 +78,16 @@ builder.Services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserRequestValidator>();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAngular", builder =>
+        builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+});
+;
+
 var app = builder.Build();
+
+// E depois de app.Build():
+app.UseCors("AllowAngular");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
