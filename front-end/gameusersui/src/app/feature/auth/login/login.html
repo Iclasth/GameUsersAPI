@@ -1,0 +1,19 @@
+<app-auth-card>
+    <h2 class="text-brand-sapphire " style="text-align: center; margin-bottom: 1.5rem;">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onsubmit()">
+
+       <app-form-field label="Username" [control]="loginForm.get('username')!">
+           <input type="text" formControlName="username" placeholder="seu-username">
+        </app-form-field>
+        
+        <app-form-field label="Password" [control]="loginForm.get('password')!">
+            <input type="password" formControlName="password" placeholder="••••••••">
+        </app-form-field>
+
+        <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 1rem;">
+        Não tem conta ainda? Se torne um novo desafiante! <a routerLink="/register">Registrar</a>
+    </p>
+</app-auth-card>

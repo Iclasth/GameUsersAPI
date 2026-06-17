@@ -1,0 +1,26 @@
+.form-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+.field-label {
+  color: var(--frozen-water);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.error-container {
+  color: #ff5252; /* Cor de erro */
+  font-size: 0.75rem;
+  height: 15px; /* Evita que o layout "pule" quando o erro aparece */
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error-container.visible {
+  opacity: 1;
+}
