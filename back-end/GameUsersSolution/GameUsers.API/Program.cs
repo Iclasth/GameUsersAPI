@@ -4,6 +4,7 @@ using GameUsers.API.Filters;
 using GameUsers.API.Infraestructure;
 using GameUsers.API.Models;
 using GameUsers.API.Services;
+using GameUsers.API.UseCase.GetUserById;
 using GameUsers.API.UseCase.Login;
 using GameUsers.API.UseCase.Register;
 using GameUsers.API.UseCase.Validation;
@@ -73,6 +74,7 @@ builder.Services.AddScoped<TokenService>();
 // UseCases (Dependency Injection)
 builder.Services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 builder.Services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
+builder.Services.AddScoped<IGetUserByIdUseCase, GetUserByIdUseCase>();
 
 // Fluent Validation
 builder.Services.AddFluentValidationAutoValidation();

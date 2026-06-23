@@ -6,6 +6,7 @@ using GameUsers.Communication.Request;
 using GameUsers.API.UseCase.Register;
 using GameUsers.API.UseCase.Login;
 using GameUsers.Communication.Response;
+using GameUsers.API.UseCase.GetUserById;
 
 namespace GameUsers.API.Controllers
 {
@@ -15,14 +16,15 @@ namespace GameUsers.API.Controllers
     {
         private readonly IRegisterUserUseCase _register;
         private readonly ILoginUserUseCase _Login;
-        // private readonly IGetUserByIdUseCase _getById;
+        private readonly IGetUserByIdUseCase _getById;
         // private readonly IUpdateUserUseCase _update;
         // private readonly IDeleteUserUseCase _delete;
 
-        public UserController(IRegisterUserUseCase register, ILoginUserUseCase login)
+        public UserController(IRegisterUserUseCase register, ILoginUserUseCase login, IGetUserByIdUseCase getById)
         {
             _register = register;
             _Login = login;
+            _getById = getById;
         }
 
         [HttpPost("register")]
@@ -50,9 +52,13 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public IActionResult GetUserById()
+        public async Task<ActionResult<AuthResponse>> GetUserById(int id)
         {
-            return Ok();
+            var response = _getById.ExecuteAsync(id);
+
+            if (response != null) return NotFound("Usuário não encontrado");
+
+            return Ok(response);
         }
 
         [HttpGet("update")]
