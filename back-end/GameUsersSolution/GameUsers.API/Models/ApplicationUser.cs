@@ -2,7 +2,7 @@
 
 namespace GameUsers.API.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
         public string DisplayName { get; set; } = string.Empty;
         public string Class { get; set; } = string.Empty;

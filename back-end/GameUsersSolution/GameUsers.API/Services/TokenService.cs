@@ -24,7 +24,7 @@ namespace GameUsers.API.Services
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? ""),
                 new Claim("displayName", user.DisplayName ?? "")
             };

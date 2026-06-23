@@ -35,7 +35,7 @@ builder.Services.AddDbContext<GameUsersDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
 {
     options.Password.RequiredLength = 6;
     options.Password.RequireDigit = true;
