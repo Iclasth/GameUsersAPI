@@ -15,6 +15,9 @@ namespace GameUsers.API.Controllers
     {
         private readonly IRegisterUserUseCase _register;
         private readonly ILoginUserUseCase _Login;
+        // private readonly IGetUserByIdUseCase _getById;
+        // private readonly IUpdateUserUseCase _update;
+        // private readonly IDeleteUserUseCase _delete;
 
         public UserController(IRegisterUserUseCase register, ILoginUserUseCase login)
         {
@@ -37,6 +40,7 @@ namespace GameUsers.API.Controllers
             
             return Ok(response);
         }
+
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponse>> Login([FromBody]LoginUserRequest request)
         {
@@ -44,8 +48,21 @@ namespace GameUsers.API.Controllers
 
             return Ok(response);
         }
-        [HttpGet("me")]
-        public IActionResult GetUsers()
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetUserById()
+        {
+            return Ok();
+        }
+
+        [HttpGet("update")]
+        public IActionResult Update()
+        {
+            return Ok();
+        }
+
+        [HttpGet("delete")]
+        public IActionResult Delete()
         {
             return Ok();
         }
