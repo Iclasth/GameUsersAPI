@@ -56,7 +56,7 @@ namespace GameUsers.API.Controllers
         {
             var response = _getById.ExecuteAsync(id);
 
-            if (response != null) return NotFound("Usuário não encontrado");
+            if (response == null) return NotFound("Usuário não encontrado");
 
             return Ok(response);
         }
