@@ -7,6 +7,8 @@ using GameUsers.API.UseCase.Register;
 using GameUsers.API.UseCase.Login;
 using GameUsers.Communication.Response;
 using GameUsers.API.UseCase.GetUserById;
+using GameUsers.API.UseCase.Delete;
+using GameUsers.API.UseCase.Update;
 
 namespace GameUsers.API.Controllers
 {
@@ -17,14 +19,16 @@ namespace GameUsers.API.Controllers
         private readonly IRegisterUserUseCase _register;
         private readonly ILoginUserUseCase _Login;
         private readonly IGetUserByIdUseCase _getById;
-        // private readonly IUpdateUserUseCase _update;
-        // private readonly IDeleteUserUseCase _delete;
+        private readonly IUpdateUserUseCase _update;
+        private readonly IDeleteUserUseCase _delete;
 
-        public UserController(IRegisterUserUseCase register, ILoginUserUseCase login, IGetUserByIdUseCase getById)
+        public UserController(IRegisterUserUseCase register, ILoginUserUseCase login, IGetUserByIdUseCase getById, IUpdateUserUseCase update, IDeleteUserUseCase delete)
         {
             _register = register;
             _Login = login;
             _getById = getById;
+            _update = update;
+            _delete = delete;
         }
 
         [HttpPost("register")]
@@ -61,16 +65,20 @@ namespace GameUsers.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("update")]
-        public IActionResult Update()
+        [HttpPut("update")]
+        public async Task<ActionResult<AuthResponse>> Update(int id, RegisterUserRequest novosDados)
         {
-            return Ok();
+            var response = _update.ExecuteAsync(id, novosDados);
+
+            return NoContent();
         }
 
-        [HttpGet("delete")]
-        public IActionResult Delete()
+        [HttpDelete("delete")]
+        public async Task<ActionResult<AuthResponse>> Delete(int id)
         {
-            return Ok();
+            var response = _delete.ExecuteAsync(id);
+
+            return NoContent();
         }
         
     }

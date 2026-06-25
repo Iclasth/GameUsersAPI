@@ -4,9 +4,11 @@ using GameUsers.API.Filters;
 using GameUsers.API.Infraestructure;
 using GameUsers.API.Models;
 using GameUsers.API.Services;
+using GameUsers.API.UseCase.Delete;
 using GameUsers.API.UseCase.GetUserById;
 using GameUsers.API.UseCase.Login;
 using GameUsers.API.UseCase.Register;
+using GameUsers.API.UseCase.Update;
 using GameUsers.API.UseCase.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -75,6 +77,8 @@ builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
 builder.Services.AddScoped<ILoginUserUseCase, LoginUserUseCase>();
 builder.Services.AddScoped<IGetUserByIdUseCase, GetUserByIdUseCase>();
+builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 
 // Fluent Validation
 builder.Services.AddFluentValidationAutoValidation();
