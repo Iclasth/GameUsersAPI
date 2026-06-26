@@ -32,6 +32,8 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpPost("register")]
+        [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AuthResponse>> Register([FromBody]RegisterUserRequest request)
         {
             var user = new ApplicationUser
@@ -44,10 +46,12 @@ namespace GameUsers.API.Controllers
             var response = await _register.ExecuteAsync(request);
 
             
-            return Ok(response);
+            return Created(string.Empty, response);
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AuthResponse), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AuthResponse>> Login([FromBody]LoginUserRequest request)
         {
             var response = _Login.ExecuteAsync(request);
@@ -56,6 +60,8 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [ProducesResponseType(typeof(ResponseShortUserJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorMessagesJson), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<AuthResponse>> GetUserById(int id)
         {
             var response = _getById.ExecuteAsync(id);
@@ -66,6 +72,9 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpPut("update")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseShortUserJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseShortUserJson), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<AuthResponse>> Update(int id, RegisterUserRequest novosDados)
         {
             var response = _update.ExecuteAsync(id, novosDados);
@@ -74,6 +83,8 @@ namespace GameUsers.API.Controllers
         }
 
         [HttpDelete("delete")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseShortUserJson),StatusCodes.Status404NotFound)]
         public async Task<ActionResult<AuthResponse>> Delete(int id)
         {
             var response = _delete.ExecuteAsync(id);
