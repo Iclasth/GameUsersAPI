@@ -1,6 +1,7 @@
 ﻿using GameUsers.API.Models;
 using GameUsers.API.Services;
 using GameUsers.Communication.Response;
+using GameUsers.Exceptions.ExceptionsBase;
 using Microsoft.AspNetCore.Identity;
 
 namespace GameUsers.API.UseCase.Delete
@@ -19,13 +20,13 @@ namespace GameUsers.API.UseCase.Delete
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 
-            if (user == null) return null;
+            if (user == null) throw new NotFoundException("O usuário em questão não foi encontrado");
 
             var delete = await _userManager.DeleteAsync(user);
 
             var token = _tokenService.CreateToken(user);
 
-            return new AuthResponse(token, user.UserName, user.Id);
+            return new AuthResponse(token);
         }
     }
 }

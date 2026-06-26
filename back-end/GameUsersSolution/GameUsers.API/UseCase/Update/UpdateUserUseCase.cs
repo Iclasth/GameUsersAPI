@@ -17,19 +17,24 @@ namespace GameUsers.API.UseCase.Update
             _userManager = userManager;
             _tokenService = tokenService;
         }
-        public async Task<AuthResponse> ExecuteAsync(int id, RegisterUserRequest novosDados)
+        public async Task<ResponseShortUserJson> ExecuteAsync(int id, RegisterUserRequest novosDados)
         {
             Validate(novosDados);
 
             var user = await _userManager.FindByIdAsync(id.ToString());
 
-            if (user == null) return null;
+            if (user == null) throw new NotFoundException("O usuário em questão não foi encontrado");
 
             var update = await _userManager.UpdateAsync(user);
 
             var token = _tokenService.CreateToken(user);
 
-            return new AuthResponse(token, user.UserName, user.Id);
+            return new ResponseShortUserJson
+            {
+                Id = user.Id,
+                DisplayName = user.DisplayName,
+                Token = token,
+            };
         }
 
         private void Validate(RegisterUserRequest request)

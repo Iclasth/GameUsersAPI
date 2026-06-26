@@ -6,6 +6,6 @@ namespace GameUsers.API.UseCase.Update
 {
     public interface IUpdateUserUseCase
     {
-        Task<AuthResponse> ExecuteAsync(int id, RegisterUserRequest novosDados);
+        Task<ResponseShortUserJson> ExecuteAsync(int id, RegisterUserRequest novosDados);
     }
 }

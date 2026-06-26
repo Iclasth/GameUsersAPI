@@ -5,6 +5,6 @@ namespace GameUsers.API.UseCase.GetUserById
 {
     public interface IGetUserByIdUseCase
     {
-        Task<AuthResponse> ExecuteAsync(int id);
+        Task<ResponseShortUserJson> ExecuteAsync(int id);
     }
 }
